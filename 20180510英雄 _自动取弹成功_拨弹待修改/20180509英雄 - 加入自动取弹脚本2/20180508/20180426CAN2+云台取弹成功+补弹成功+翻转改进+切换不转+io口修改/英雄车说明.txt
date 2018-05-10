@@ -1,0 +1,16 @@
+##英雄车操作说明:
+1、原遥控器模式现为取弹模式 做出如下修改
+   a、配置can2控制抬升（遥控器左摇杆上下通道）和拨弹电机（鼠标左键）（测试已成功）
+   b、配置气动的IO口 控制气缸(测试已成功)Q,E控制爪子伸出收回 shift、ctrl控制对弹药箱的加紧      和放松。
+   c、controltask.c中禁止了云台循环(即底盘跟随被关闭)。遥控器左摇杆左右通道控制底盘旋转运      动，右摇杆控制底盘平动。(测试已完成)
+
+2、原键鼠模式下，操作与步兵一致。发射时气缸与拨弹轮配合运动，完成大弹丸发射（测试已完成)
+
+
+
+##调试备注
+如果想在遥控模式下调云台，只需在ControlTask.c里将GimbalControl解禁。
+要想开启底盘跟随，在CMControl.c->CMControlLoop->NORMAL_REMOTE_STATE模式下修改为:
+	CMFollowVal = followValCal(0);
+        move(RC_Ex_Ctl.rc.ch0,RC_Ex_Ctl.rc.ch1,CMFollowVal);
+    

@@ -1,0 +1,23 @@
+1.在ShootControl.c文件中的void ShootControlInit(void)函数中添加启动后拨弹盘的位置初始化函数
+
+2.在ShootControl.h文件中添加必须的内容
+
+
+3，在can.c和can.h的void CAN1_RX0_IRQHandler(void)中添加了读取拨弹盘电机的机械角度的语句
+
+4.在PlatePID函数里，最后的PIDOut_Whole_Plate在yaw轴程序上取了相反数，但在原拨弹程序上没有，待问
+
+
+5.在hardware里加了控制气缸的底层IO配置"cylinder.c",气缸IO写在PD14
+
+6.在main.h加了#include "cylinder.h"
+
+
+7.在hardware里加了红外线读取的底层IO配置“infrared.c”,两个红外输入IO写在PD12、PD13
+
+8.在main.h里加了#include "infrared.h"
+
+9.在BSP_Init里加上了cylinder和infrared的初始化
+
+
+10.在TIM2的中断函数里写红外传感的状态读取函数的执行，程序写在ShootControl 里
